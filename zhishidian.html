@@ -1,5 +1,47 @@
 console.dir（）    console.log（）
 
+<form action="/api/user/login" method="post">
+	<ul>
+		<li>姓名: <input type="text" name="username"></li>
+		<li>密码: <input type="password" name="pass"></li>
+		<li><input type="submit" value="提交"></li>
+	</ul>
+</form>
+<script src="./jquery.min.js"></script>
+<!-- ajax 表单提交插件 -->
+<script>
+	// 使用表单默认提交，页面会刷新，用户体验不佳
+	// 经常性的使用 ajax 来提交表单
+	// $('form').on('submit', function () {
+	// 	$(this).serialize();
+	// 	$.ajax();
+	// 	return false; 阻止默认提交
+	// })
+	// 也可使用插件将上述的步骤封装起来
+	$('form').ajaxForm({
+		// ajaxForm 插件会默认读取 form 表单的
+		// action 做为提交地址
+		// 也可以使用 url 来覆盖这个默认值
+		url: '/api/test',
+		// ajaxForm 插件会默认读取 form 表单的
+		// method 做为提交方式
+		// 也可以使用 type 来覆盖这个默认值
+		type: 'get',
+		// ajaxForm 插件会默认使用 jQuery 的 serialize
+		// 来获取整个表单的数据，通过 data 还可以对数据
+		// 进行追加
+		data: {
+			gender: '男'
+		},
+		// 通过回调函数可以处理响应结果
+		success: function (info) {
+			// info 即服务端响应的结果
+			console.log(info)
+		}
+	});
+</script>
+
+
 2-32  30
 Math.floor(Math.random()* (max-min+1) ) + min;   随机生成几到几的数
 
