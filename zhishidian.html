@@ -1,11 +1,30 @@
 console.dir（） console.log（）
 
 <form action="/api/user/login" method="post">
-	<ul>
-		<li>姓名: <input type="text" name="username"></li>
-		<li>密码: <input type="password" name="pass"></li>
-		<li><input type="submit" value="提交"></li>
-	</ul>
+	<div class="form_box">
+		<div class="mui-input-row">
+			<input name="recipients" type="text" placeholder="收货人">
+		</div>
+		<div class="mui-input-row">
+			<input name="postcode" type="text" placeholder="邮编">
+		</div>
+		<div class="mui-input-row hometown">
+			<input type="hidden" name="address">
+			<select id="p" data-id="">
+				<option value="">请选择省份</option>
+			</select>
+			<select id="c" data-id="">
+				<option value="">请选择城市</option>
+			</select>
+			<select id="d" data-id="">
+				<option value="">请选择区/县</option>
+			</select>
+		</div>
+		<div class="mui-input-row">
+			<textarea name="addressDetail" id="textarea" rows="5" placeholder="多行文本框"></textarea>
+		</div>
+		<button class="mui-btn mui-btn-primary btn_login">确认</button>
+	</div>
 </form>
 <script src="./jquery.min.js"></script>
 <!-- ajax 表单提交插件 -->
@@ -37,33 +56,26 @@ console.dir（） console.log（）
 		beforeSerialize: function (form) {
 			// 回调方法，在内部调用
 			// serialize 前先调该函数
-
 			// 获取 select DOM 中选中的文本
 			var address = '';
 			form.find('select').each(function () {
 				address += $(this).find('option:selected').text();
 			})
-
 			// console.log(address)
 			// 添加DOM
 			$('input[name="address"]').val(address);
 		},
-
 		 beforeSubmit: function (arr, form) {
                 // 在提交和serialize之间被调用
-
                 // console.log(arr)
-
                 // 获取 select DOM 中选中的文本
                 var address = '';
                 form.find('select').each(function () {
                     address += $(this).find('option:selected').text();
                 })
-
                 // console.log(address)
                 // 将获得的数据更新至 arr
                 arr[2].value = address;
-
                 // 表单则不会被提交，一般来
                 // 做表单验证
                 // return false; 
